@@ -23,7 +23,7 @@ Python (version 3.0 or later)
 
 ## Usage
 
-Setting up dataclasses:
+### Setting up dataclasses:
 
 ```python
 @dataclass
@@ -33,27 +33,34 @@ class Record:
     receiver: str
     amount: float = 0
 ```
-![Screenshot of Plot](https://github.com/hyppolite314/geo_analysis_realty/blob/main/inter_plot.png?raw=true)
-
-GeoViews via `hvplot.points`
+### Methods:
 
 ```python
-all_neighborhoods_plot = all_neighborhoods_df.hvplot.points(
-    'Lon',
-    'Lat',
-    geo=True,
-    size='sale_price_sqr_foot',
-    scale=1,
-    color='gross_rent',
-    tiles='OSM',
-    frame_width=700,
-    frame_height=500,
-    title = "Average Sales Price per SqFt (2010-2016)"
-    )
+    def hash_block(self):
+        sha = hashlib.sha256()
 
-all_neighborhoods_plot
+        record = str(self.record).encode()
+        sha.update(record)
+
+        creator_id = str(self.creator_id).encode()
+        sha.update(creator_id)
+
+        timestamp = str(self.timestamp).encode()
+        sha.update(timestamp)
+
+        prev_hash = str(self.prev_hash).encode()
+        sha.update(prev_hash)
+
+        nonce = str(self.nonce).encode()
+        sha.update(nonce)
+
+        return sha.hexdigest()
 ```
-![Screenshot of Plot](https://github.com/hyppolite314/geo_analysis_realty/blob/main/geo_view.png?raw=true)
+## Screenshots
+
+![Screenshot of Plot](https://github.com/hyppolite314/Module_18/blob/main/Screen%20Shot%202022-08-01%20at%2010.50.39%20PM.png)
+![Screenshot of Plot](https://github.com/hyppolite314/Module_18/blob/main/Screen%20Shot%202022-08-01%20at%2010.50.47%20PM.png)
+![Screenshot of Plot](https://github.com/hyppolite314/Module_18/blob/main/Screen%20Shot%202022-08-01%20at%2010.53.04%20PM.png)
 
 ---
 
